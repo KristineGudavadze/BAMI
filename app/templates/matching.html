@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Find Matches</h2>
+<p>Here are your most compatible matches based on your music taste:</p>
+
+{% if matches %}
+  <ul>
+    {% for match in matches %}
+      <li>
+        <h4>{{ match.user.display_name }}</h4>
+        <p>Similarity Score: {{ match.similarity }}</p>
+
+        <form action="{{ url_for('routes.connect', user_id=match.user.id) }}" method="post" style="display:inline;">
+          <button type="submit">Connect</button>
+        </form>
+
+        <form action="{{ url_for('routes.skip', user_id=match.user.id) }}" method="post" style="display:inline;">
+          <button type="submit">Skip</button>
+        </form>
+
+        {% if match.connected %}
+          <a href="{{ url_for('routes.chat', matched_user_id=match.user.id) }}">Chat</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No matches found yet.</p>
+{% endif %}
+
+<a href="{{ url_for('routes.home') }}">Back to Home</a>
+{% endblock %}

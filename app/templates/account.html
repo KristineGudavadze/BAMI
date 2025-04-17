@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Account</h2>
+<p>Username: {{ user.display_name }}</p>
+<p>Spotify ID: {{ user.spotify_id }}</p>
+
+<h3>Your Top Artists:</h3>
+<ul>
+  {% for artist in user.top_artists %}
+    <li>{{ artist }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Your Top Genres:</h3>
+<ul>
+  {% for genre in user.top_genres %}
+    <li>{{ genre }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Your Most Recent Songs:</h3>
+<ul>
+  {% for track in user.recent_tracks %}
+    <li>{{ track }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{{ url_for('routes.home') }}">Back to Home</a>
+{% endblock %}

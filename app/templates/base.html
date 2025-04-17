@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}BAMI{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>BAMI</h1>
+    <nav>
+      <a href="{{ url_for('routes.home') }}">Home</a>
+      {% if current_user.is_authenticated %}
+        <a href="{{ url_for('routes.account') }}">Account</a>
+        <a href="{{ url_for('routes.match') }}">Match</a>
+
+        {# Show chat link only if matched_user is defined and valid #}
+        {% if matched_user is defined and matched_user %}
+          <a href="{{ url_for('routes.chat', matched_user_id=matched_user.id) }}">Chat</a>
+        {% else %}
+          <span class="disabled-link">Chat</span>
+        {% endif %}
+
+        <a href="{{ url_for('routes.logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('routes.login') }}">Login</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BAMI</p>
+  </footer>
+</body>
+</html>
+

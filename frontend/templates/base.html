@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAMI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">🎵 BAMI</div>
+            <nav>
+                <a href="{{ url_for('routes.home') }}">Home</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('routes.account') }}">Account</a>
+                    <a href="{{ url_for('routes.match') }}">Match</a>
+                    <a href="{{ url_for('routes.chat', matched_user_id=matched_user_id) }}">Chat</a>
+                    <a href="{{ url_for('routes.logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('routes.login') }}">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BAMI. All rights reserved.</p>
+    </footer>
+</body>
+</html>

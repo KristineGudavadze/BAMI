@@ -1,0 +1,5 @@
+import os
+
+CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID', '266c1a9756b54cf4874587f21d5b4770')
+CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET', 'c27f254d1f2747d0a1d35eb1d7ac74fe')
+REDIRECT_URI = os.getenv('SPOTIFY_REDIRECT_URI', 'http://127.0.0.1:8000/account/callback')

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h2>Chat</h2>
+
+    {% if matched_user %}
+      <h3>Chat with {{ matched_user.username }}</h3>
+
+      <div class="chat-window">
+        <div class="messages">
+          {% for msg in messages %}
+            <div class="message">
+              <p>
+                <strong>
+                  {{ 'You' if msg.sender_id == current_user.id else matched_user.username }}:
+                </strong>
+                {{ msg.content }}
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+
+        <form method="POST" class="chat-form">
+          <input type="text" name="message" placeholder="Type your message..." required class="chat-input">
+          <button type="submit" class="send-btn">Send</button>
+        </form>
+      </div>
+    {% else %}
+      <p class="no-match">No active chat selected.</p>
+    {% endif %}
+
+    <h3>Your Chats</h3>
+    {% if chat_partners %}
+      <ul class="chat-list">
+        {% for user in chat_partners %}
+          <li><a href="{{ url_for('routes.chat', matched_user_id=user.id) }}">{{ user.username }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="no-chats">You don't have any messages yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}

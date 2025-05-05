@@ -1,0 +1,33 @@
+services:
+  pgdb:
+    image: "postgres:17.4"
+    container_name: pgdb
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD-postgres}
+      POSTGRES_DB: ${DATABASE_NAME-postgres}
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    environment:
+      DB_USER: ${POSTGRES_USER-postgres}
+      DB_PASSWORD: ${POSTGRES_PASSWORD-postgres}
+      DB_HOST: pgdb
+      DB_PORT: 5432
+      DB_NAME: ${DATABASE_NAME-postgres}
+    volumes:
+      - ./backend/:/opt/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - pgdb
+
+volumes:
+  postgres_db:

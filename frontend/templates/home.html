@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to BAMI</h1>
+      <p>Connect with people who share your music taste</p>
+      <a href="{{ url_for('routes.match') }}" class="cta-btn">Find Your Match</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Why Choose BAMI?</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="icon">🎶</div>
+        <h3>Music-Centric</h3>
+        <p>We connect people based on their music preferences, not appearances.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🤝</div>
+        <h3>Real Connections</h3>
+        <p>Swipe and match with real people who share your passion for music.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💬</div>
+        <h3>Instant Chat</h3>
+        <p>Start chatting with your matches and discover new music together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How BAMI Works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-number">1</span>
+        <p>Log in with your Spotify or Apple Music account.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <p>Browse and match with people who have similar music tastes.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <p>Start chatting and share music recommendations!</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-cta">
+    <h2>Ready to Find Your Match?</h2>
+    <a href="{{ url_for('routes.match') }}" class="cta-btn">Start Now</a>
+  </section>
+{% endblock %}
